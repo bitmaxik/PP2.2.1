@@ -10,7 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MainApp {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
+        // "throws SQLException  - для чего? будь внимательным"
+        // я это убрал, но он был в проекте изначально
+        //правда если это был наводящий вопрос, то я тогда не понял к какому моменту)
+
+
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
@@ -33,15 +38,7 @@ public class MainApp {
         userService.add(user3);
 
 
-        List<User> users = userService.listUsers();
-        for (User user : users) {
-            System.out.println("Id = " + user.getId());
-            System.out.println("First Name = " + user.getFirstName());
-            System.out.println("Last Name = " + user.getLastName());
-            System.out.println("Email = " + user.getEmail());
-            System.out.println("Car = " + user.getCar());
-            System.out.println();
-        }
+        userService.listUsers().forEach(System.out::println);
 
         User user123 = userService.getUser("Car1", 111);
         System.out.println(user123);
